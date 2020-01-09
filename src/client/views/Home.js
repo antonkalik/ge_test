@@ -3,24 +3,25 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionUpdateStore } from '../redux/actions';
 import { FetchData } from '../api';
-import { Header, Content } from '../components';
+import { Content, Header } from '../components';
 
 const socketUrl = 'wss://hometask.eg1236.com/game1/';
 const socket = new WebSocket(socketUrl);
+const initialState = { x: 0, y: 0 };
+const initNewGame = () => {
+  socket.onopen = function() {
+    socket.send('new 1');
+  };
+  socket.onmessage = function(e) {
+    console.log('data: ', e.data);
+  };
+};
 
 export function Home({ updateStore }) {
-  const [coordinates, setCoordinates] = useState([0, 0]);
-
-  console.log({ coordinates });
+  const [coordinates, setCoordinates] = useState(initialState);
 
   useEffect(() => {
-    socket.onopen = function() {
-      socket.send('new 1');
-    };
-
-    socket.onmessage = function(e) {
-      console.log('data: ', e.data);
-    };
+    initNewGame();
   }, []);
 
   useEffect(() => {
@@ -30,29 +31,40 @@ export function Home({ updateStore }) {
   }, [updateStore]);
 
   const getInfoFromSocket = () => {
-    socket.send('open 2 1');
+    console.log('to socket sent with coordinates: ', coordinates);
+    socket.send(`open ${coordinates.x} ${coordinates.y}`);
     socket.send('map');
   };
 
-  const getArrayAmount = amount => [...Array(amount).keys()];
   const onChangeCoordinates = (axis, value) => {
-    console.log({ axis, value });
+    setCoordinates({
+      ...coordinates,
+      [axis]: parseInt(value),
+    });
   };
 
   return (
     <div className="home">
       <Header />
-      {getArrayAmount(2).map(axis => (
-        <select key={axis} onChange={({ target: { value } }) => onChangeCoordinates(axis, value)}>
-          {getArrayAmount(10).map(n => (
-            <option key={n} value={n}>
-              {n}
-            </option>
-          ))}
-        </select>
-      ))}
-
+      <p>
+        {['x', 'y'].map(axis => (
+          <span key={axis}>
+            {axis}:{' '}
+            <select onChange={({ target: { value } }) => onChangeCoordinates(axis, value)}>
+              {[...Array(10).keys()].map(n => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ))}
+            </select>
+          </span>
+        ))}
+      </p>
+      <p>
+        Coordinates - <span>x: {coordinates.x}</span> <span>y: {coordinates.y}</span>
+      </p>
       <button onClick={getInfoFromSocket}>get info from socket</button>
+      <button onClick={() => initNewGame()}>New Game</button>
       <Content />
     </div>
   );
