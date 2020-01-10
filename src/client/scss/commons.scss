@@ -1,3 +1,7 @@
-.app {
-  border: 1px solid green;
+#root {
+  background-color: #252525;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: white
 }
