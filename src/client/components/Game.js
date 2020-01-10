@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
-const socketUrl = 'wss://hometask.eg1236.com/game1/';
-const socket = new WebSocket(socketUrl);
+const url = 'wss://hometask.eg1236.com/game1/';
 const initialState = { x: 0, y: 0 };
 
 export default function Content({ game }) {
   const [coordinates, setCoordinates] = useState(initialState);
+  const socket = new WebSocket(url);
 
   useEffect(() => {
+    console.log('Init game');
+
     socket.onopen = function() {
-      socket.send('new 1');
+      socket.send('new ' + game);
     };
     socket.onmessage = function(e) {
       console.log('data: ', e.data);
     };
-  }, [game]);
+    socket.onclose = () => {
+      socket.close();
+    };
+  }, [game, socket]);
 
   const getInfoFromSocket = () => {
     socket.send(`open ${coordinates.x} ${coordinates.y}`);

@@ -74,10 +74,16 @@ export function Home() {
           ))}
         </select>
         <button onClick={() => setGame(1)}>New Game</button>
-        <button onClick={() => setGame(0)}>Close</button>
+        <button
+          onClick={() => {
+            setGame(0);
+          }}
+        >
+          Close
+        </button>
       </div>
 
-      <Game game={game} />
+      {game > 0 && <Game game={game} />}
     </div>
   );
 }
