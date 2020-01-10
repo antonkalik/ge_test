@@ -5,25 +5,27 @@ const initialState = { x: 0, y: 0 };
 
 export default function Content({ game }) {
   const [coordinates, setCoordinates] = useState(initialState);
+  const [data, setData] = useState(null);
   const socket = new WebSocket(url);
 
   useEffect(() => {
-    console.log('Init game');
+    console.log('Init game', game);
 
     socket.onopen = function() {
       socket.send('new ' + game);
+      socket.send(`open ${coordinates.x} ${coordinates.y}`);
+      socket.send('map');
     };
     socket.onmessage = function(e) {
-      console.log('data: ', e.data);
+      setData(e.data);
     };
     socket.onclose = () => {
       socket.close();
     };
-  }, [game, socket]);
+  }, [game]);
 
   const getInfoFromSocket = () => {
     socket.send(`open ${coordinates.x} ${coordinates.y}`);
-    socket.send('map');
   };
 
   const onChangeCoordinates = (axis, value) => {
@@ -34,9 +36,31 @@ export default function Content({ game }) {
   };
 
   return (
-    <div>
+    <div className="game">
       <h2>Game</h2>
-
+      {data && (
+        <div>
+          {data
+            .split(/\n/)
+            .slice(1, -1)
+            .map((it, y) => (
+              <p key={y}>
+                {[...it].map((s, x) => {
+                  return (
+                    <span
+                      key={x}
+                      onClick={() => {
+                        console.log({ x, y });
+                      }}
+                    >
+                      {s}
+                    </span>
+                  );
+                })}
+              </p>
+            ))}
+        </div>
+      )}
       <p>
         Coordinates - <span>x: {coordinates.x}</span> <span>y: {coordinates.y}</span>
       </p>
