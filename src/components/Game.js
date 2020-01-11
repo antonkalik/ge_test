@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BlinkSymbol, Box } from '.';
+import { BlinkSymbol, Box } from './index';
 
 // first lvl. You win. The password for this level is: ThisWasEasy
 

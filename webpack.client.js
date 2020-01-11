@@ -1,15 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  entry: ['./src/client/index.js', './src/client/scss/style.scss'],
+  entry: ['./src/index.js', './src/scss/style.scss'],
   devtool: 'eval-source-map',
   output: {
-    filename: 'client_bundle.js',
-    path: __dirname + '/dist/public',
+    filename: 'bundle.js',
+    path: __dirname + '/dist',
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -18,10 +19,6 @@ module.exports = {
     hot: true,
     publicPath: '/',
     historyApiFallback: true,
-    proxy: {
-      '/api': 'http://localhost:9999',
-      changeOrigin: true,
-    },
   },
   module: {
     rules: [
@@ -50,8 +47,10 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyWebpackPPlugin([{ from: '_redirects' }, { from: 'src/res', to: 'res/' }]),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      title: 'GE Test',
       filename: './index.html',
     }),
   ],
