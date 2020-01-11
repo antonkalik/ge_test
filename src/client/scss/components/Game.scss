@@ -1,9 +1,10 @@
 .game {
+  width: 100%;
   p {
     cursor: default;
     font-size: 14px;
     line-height: 0;
-
+    white-space: nowrap;
     > span.box {
       border: 1px solid gray;
       display: inline-block;
