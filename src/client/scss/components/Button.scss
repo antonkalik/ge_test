@@ -1,0 +1,12 @@
+button {
+  border: 1px solid gray;
+  background-color: #252525;
+  color: white;
+  font-family: 'Lexend Exa', sans-serif;
+  padding: 10px 0;
+  cursor: pointer;
+  min-width: 200px;
+  &:hover {
+    background-color: lighten(#252525, 10);;
+  }
+}

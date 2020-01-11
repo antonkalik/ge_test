@@ -4,14 +4,17 @@ export default function Content({ socket }) {
   const [data, setData] = useState(null);
 
   socket.onmessage = function(e) {
-    console.log(e.data);
-    setData(e.data);
+    if (e.data.includes('map:')) {
+      setData(e.data);
+    }
   };
 
   const onClickField = async coordinates => {
     await socket.send(`open ${coordinates.x} ${coordinates.y}`);
     await socket.send('map');
   };
+
+  console.log({ data });
 
   return (
     <div className="game">

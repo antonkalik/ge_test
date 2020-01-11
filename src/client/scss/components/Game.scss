@@ -3,11 +3,12 @@
     cursor: default;
     font-size: 14px;
     line-height: 0;
+
     > span.box {
       border: 1px solid gray;
       display: inline-block;
-      height: 30px;
-      width: 30px;
+      height: 15px;
+      width: 15px;
       background-color: #1e6034;
       &.hide {
         color: #252525;

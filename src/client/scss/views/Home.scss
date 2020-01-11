@@ -1,5 +1,21 @@
 .home {
-  padding: 20px;
-  border: 2px solid #4b0000;
+  margin: 20px;
+  border: 1px solid gray;
   background-color: #252525;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+  div.game-chooser {
+    text-align: center;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    h2 {
+      padding-bottom: 30px;
+    }
+  }
 }

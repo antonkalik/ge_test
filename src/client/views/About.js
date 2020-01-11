@@ -13,7 +13,4 @@ const mapStateToProps = store => {
   return { store };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(About);
+export default connect(mapStateToProps, null)(About);
