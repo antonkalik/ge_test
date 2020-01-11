@@ -11,8 +11,8 @@ export default function Content({ socket, game }) {
     }
   };
 
-  const onClickField = c => {
-    socket.send(`open ${c.x} ${c.y}`);
+  const onClickField = ({ x, y }) => {
+    socket.send(`open ${x} ${y}`);
     socket.send('map');
   };
 
@@ -27,8 +27,8 @@ export default function Content({ socket, game }) {
       {cells &&
         cells.map((it, y) => (
           <p key={y}>
-            {[...it].map((s, x) => {
-              const props = { key: x, s, x, y, onClickField };
+            {[...it].map((box, x) => {
+              const props = { key: x, box, x, y, onClickField };
               return <Box {...props} />;
             })}
           </p>

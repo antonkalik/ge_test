@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-export default function Box({ onClickField, s, x, y }) {
+export default function Box({ onClickField, box, x, y }) {
   const [flag, setFlag] = useState(false);
-  const classNames = ['box', s === '□' && 'hide', s === '*' && 'blow', flag && 'flag'].filter(
+  const classNames = ['box', box === '□' && 'hide', box === '*' && 'blow', flag && 'flag'].filter(
     it => it
   );
 
@@ -16,7 +16,7 @@ export default function Box({ onClickField, s, x, y }) {
       key={x}
       onClick={() => onClickField({ x, y })}
     >
-      <span className="value">{flag ? 'f' : s}</span>
+      <span className="value">{flag ? 'f' : box}</span>
     </span>
   );
 }
