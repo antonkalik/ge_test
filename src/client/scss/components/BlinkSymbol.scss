@@ -1,0 +1,64 @@
+@mixin easeInOut($place, $speed) {
+  -webkit-animation: $place $speed infinite ease-in-out;
+  -moz-animation: $place $speed infinite ease-in-out;
+  animation: $place $speed infinite ease-in-out;
+}
+
+span.blink-symbol {
+  span.dot-0 {
+    @include easeInOut(dot-0, 1s)
+  }
+
+  span.dot-1 {
+    @include easeInOut(dot-1, 1s)
+  }
+
+  span.dot-2 {
+    @include easeInOut(dot-2, 1s)
+  }
+
+  @keyframes dot-0 {
+    0% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes dot-1 {
+    0% {
+      opacity: 0.5;
+    }
+    25% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes dot-2 {
+    0% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

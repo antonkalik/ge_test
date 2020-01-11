@@ -8,6 +8,9 @@
   justify-content: center;
   align-items: center;
   overflow: scroll;
+  .loader {
+    padding: 30px;
+  }
   div.game-chooser {
     text-align: center;
     min-width: 300px;

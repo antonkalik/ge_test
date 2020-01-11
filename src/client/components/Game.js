@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { BlinkSymbol } from '.';
 
-export default function Content({ socket }) {
+export default function Content({ socket, game }) {
   const [data, setData] = useState(null);
 
   socket.onmessage = function(e) {
+    console.log('DATA: ', e.data);
     if (e.data.includes('map:')) {
       setData(e.data);
     }
@@ -14,29 +16,30 @@ export default function Content({ socket }) {
     await socket.send('map');
   };
 
-  console.log({ data });
+  const cells = data && data.split(/\n/).slice(1, -1);
+
+  if (cells && cells.length < 10 && game) {
+    return <p className="loader">loading{<BlinkSymbol symbol="." />}</p>;
+  }
 
   return (
     <div className="game">
-      {data &&
-        data
-          .split(/\n/)
-          .slice(1, -1)
-          .map((it, y) => (
-            <p key={y}>
-              {[...it].map((s, x) => {
-                return (
-                  <span
-                    className={`box${s === '□' ? ' hide' : ''}`}
-                    key={x}
-                    onClick={() => onClickField({ x, y })}
-                  >
-                    <span className="value">{s}</span>
-                  </span>
-                );
-              })}
-            </p>
-          ))}
+      {cells &&
+        cells.map((it, y) => (
+          <p key={y}>
+            {[...it].map((s, x) => {
+              return (
+                <span
+                  className={`box${s === '□' ? ' hide' : ''}`}
+                  key={x}
+                  onClick={() => onClickField({ x, y })}
+                >
+                  <span className="value">{s}</span>
+                </span>
+              );
+            })}
+          </p>
+        ))}
     </div>
   );
 }

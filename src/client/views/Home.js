@@ -20,7 +20,7 @@ export function Home() {
 
   return (
     <div className="home">
-      <Game socket={socket} />
+      <Game socket={socket} game={game > 0} />
       {game < 1 ? (
         <div className="game-chooser">
           <h2>Choose New Game</h2>
@@ -32,6 +32,9 @@ export function Home() {
         </div>
       ) : (
         <button
+          style={{
+            margin: '30px 0',
+          }}
           onClick={() => {
             setGame('');
           }}
