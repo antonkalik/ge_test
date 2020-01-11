@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 export default function Content({ socket }) {
   const [data, setData] = useState(null);
@@ -15,24 +15,21 @@ export default function Content({ socket }) {
 
   return (
     <div className="game">
-      {data && (
-        <div>
-          {data
-            .split(/\n/)
-            .slice(1, -1)
-            .map((it, y) => (
-              <p key={y}>
-                {[...it].map((s, x) => {
-                  return (
-                    <span className="box" key={x} onClick={() => onClickField({ x, y })}>
-                      <span className="value">{s}</span>
-                    </span>
-                  );
-                })}
-              </p>
-            ))}
-        </div>
-      )}
+      {data &&
+        data
+          .split(/\n/)
+          .slice(1, -1)
+          .map((it, y) => (
+            <p key={y}>
+              {[...it].map((s, x) => {
+                return (
+                  <span className="box" key={x} onClick={() => onClickField({ x, y })}>
+                    <span className="value">{s}</span>
+                  </span>
+                );
+              })}
+            </p>
+          ))}
     </div>
   );
 }
