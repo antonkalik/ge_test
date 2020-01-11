@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lexend+Exa&display=swap');
 
 #root {
-  background-color: #252525;
+  background-color: $dark;
   display: flex;
   flex-direction: column;
   min-height: 100vh;

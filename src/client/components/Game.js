@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BlinkSymbol } from '.';
+import { BlinkSymbol, Box } from '.';
 
 export default function Content({ socket, game }) {
   const [data, setData] = useState(null);
@@ -28,15 +28,8 @@ export default function Content({ socket, game }) {
         cells.map((it, y) => (
           <p key={y}>
             {[...it].map((s, x) => {
-              return (
-                <span
-                  className={`box${s === '□' ? ' hide' : ''}`}
-                  key={x}
-                  onClick={() => onClickField({ x, y })}
-                >
-                  <span className="value">{s}</span>
-                </span>
-              );
+              const props = { s, x, y, onClickField };
+              return <Box {...props} />;
             })}
           </p>
         ))}

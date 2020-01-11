@@ -6,19 +6,24 @@
     font-size: 14px;
     line-height: 0;
     white-space: nowrap;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     > span.box {
-      border: 1px solid gray;
+      border: 1px solid $dark;
       display: inline-block;
-      height: 15px;
-      width: 15px;
-      background-color: #1e6034;
+      height: 20px;
+      width: 20px;
+      background-color: #3b894e;
       &.hide {
-        color: #252525;
-        background-color: #252525;
+        color: #505050;
+        background-color: #505050;
         cursor: pointer;
         &:hover {
-          color: lighten(#252525, 10);
-          background-color: lighten(#252525, 10);
+          color: lighten($dark, 10);
+          background-color: lighten($dark, 10);
         }
       }
       span.value {
@@ -26,6 +31,10 @@
         height: 100%;
         justify-content: center;
         align-items: center;
+      }
+      &.blow {
+        background-color: red;
+        color: white;
       }
     }
   }
