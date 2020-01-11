@@ -23,7 +23,11 @@ export default function Content({ socket }) {
             <p key={y}>
               {[...it].map((s, x) => {
                 return (
-                  <span className="box" key={x} onClick={() => onClickField({ x, y })}>
+                  <span
+                    className={`box${s === '□' ? ' hide' : ''}`}
+                    key={x}
+                    onClick={() => onClickField({ x, y })}
+                  >
                     <span className="value">{s}</span>
                   </span>
                 );

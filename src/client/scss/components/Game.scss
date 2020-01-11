@@ -1,13 +1,23 @@
 .game {
   p {
     cursor: default;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 0;
     > span.box {
       border: 1px solid gray;
       display: inline-block;
       height: 30px;
       width: 30px;
+      background-color: #1e6034;
+      &.hide {
+        color: #252525;
+        background-color: #252525;
+        cursor: pointer;
+        &:hover {
+          color: lighten(#252525, 10);
+          background-color: lighten(#252525, 10);
+        }
+      }
       span.value {
         display: flex;
         height: 100%;
@@ -16,5 +26,4 @@
       }
     }
   }
-
 }
