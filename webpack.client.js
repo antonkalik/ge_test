@@ -46,8 +46,13 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   plugins: [
-    new CopyWebpackPPlugin([{ from: '_redirects' }, { from: 'src/res', to: 'res/' }]),
+    new CopyWebpackPPlugin([{ from: '_redirects' }]),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       title: 'GE Test',
