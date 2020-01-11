@@ -11,9 +11,9 @@ export default function Content({ socket, game }) {
     }
   };
 
-  const onClickField = async coordinates => {
-    await socket.send(`open ${coordinates.x} ${coordinates.y}`);
-    await socket.send('map');
+  const onClickField = c => {
+    socket.send(`open ${c.x} ${c.y}`);
+    socket.send('map');
   };
 
   const cells = data && data.split(/\n/).slice(1, -1);
@@ -28,7 +28,7 @@ export default function Content({ socket, game }) {
         cells.map((it, y) => (
           <p key={y}>
             {[...it].map((s, x) => {
-              const props = { s, x, y, onClickField };
+              const props = { key: x, s, x, y, onClickField };
               return <Box {...props} />;
             })}
           </p>

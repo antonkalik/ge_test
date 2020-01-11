@@ -25,6 +25,10 @@
           color: lighten($dark, 10);
           background-color: lighten($dark, 10);
         }
+        &.flag {
+          background-color: #383838;
+          color: gray
+        }
       }
       span.value {
         display: flex;
