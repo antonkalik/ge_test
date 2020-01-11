@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Game } from '../components';
 
-const url = 'wss://hometask.eg1236.com/game1/';
-
 export function Home() {
-  const socket = new WebSocket(url);
+  const socket = new WebSocket('wss://hometask.eg1236.com/game1/');
   const [game, setGame] = useState('');
 
   useEffect(() => {
-    console.log('Init game', game);
     socket.onopen = function() {
       socket.send('new ' + game);
       socket.send('map');

@@ -10,29 +10,16 @@
   },
   "scripts": {
     "start": "npm run prod:build && node dist/server_bundle.js",
-    "prod:build": "concurrently \"npm run prod:server\" \"npm run prod:client\"",
-    "prod:server": "webpack --config ./webpack.server.js --mode production",
-    "prod:client": "webpack --config ./webpack.client.js --mode production",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:server": "nodemon ./src/server/index.js",
-    "dev:client": "webpack-dev-server --mode development --config ./webpack.client.js --open",
-    "test": "jest --config ./jest.config.js",
+    "prod:build": "webpack --config ./webpack.client.js --mode production",
+    "dev": "webpack-dev-server --mode development --config ./webpack.client.js --open",
     "lint": "eslint ./src -c .eslintrc.json"
   },
   "author": "anton kalik",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.1",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-redux": "^7.1.3",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2",
-    "redux": "^4.0.5",
-    "ws": "latest"
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

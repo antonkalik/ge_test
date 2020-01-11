@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-function About({ store }) {
-  useEffect(() => {
-    console.log({ store });
-  }, [store]);
-
-  return <div className="about">About page</div>;
+function About() {
+  return (
+    <div className="about">
+      <p>antonkalik@gmail.com</p>
+      <a href="/">back</a>
+    </div>
+  );
 }
 
-const mapStateToProps = store => {
-  return { store };
-};
-
-export default connect(mapStateToProps, null)(About);
+export default About;
