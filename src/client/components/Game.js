@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BlinkSymbol, Box } from '.';
+
+// first lvl. You win. The password for this level is: ThisWasEasy
 
 export default function Content({ socket, game }) {
   const [data, setData] = useState(null);
+  const [gameResult, setGameResult] = useState(null);
+
+  useEffect(() => {
+    setGameResult(null);
+  }, [game]);
 
   socket.onmessage = function(e) {
-    console.log('DATA: ', e.data);
     if (e.data.includes('map:')) {
       setData(e.data);
+    } else {
+      game && setGameResult(e.data);
     }
   };
 
@@ -24,6 +32,7 @@ export default function Content({ socket, game }) {
 
   return (
     <div className="game">
+      {<h2>{gameResult}</h2>}
       {cells &&
         cells.map((it, y) => (
           <p key={y}>
